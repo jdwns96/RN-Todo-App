@@ -1,36 +1,25 @@
 import React from "react";
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View } from "react-native";
 
-const App = () => {
-  const isDarkMode = useColorScheme() === "dark";
+// component
+import DateHeader from "./src/components/DateHeader";
+import AddTodo from "./src/components/AddTodo";
+import Empty from "./src/components/Empty";
 
+const App = () => {
   return (
-    <SafeAreaView>
-      <View>
-        <Text>Hello React</Text>
-      </View>
-      <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
+    <SafeAreaView style={styles.block}>
+      <DateHeader />
+      <AddTodo />
+      <Empty />
     </SafeAreaView>
   );
 };
 
+export default App;
+
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: "600",
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: "400",
-  },
-  highlight: {
-    fontWeight: "700",
+  block: {
+    flex: 1,
   },
 });
-
-export default App;
