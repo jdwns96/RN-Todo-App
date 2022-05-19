@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View } from "react-native";
+import { SafeAreaView, StyleSheet, KeyboardAvoidingView, Platform } from "react-native";
 
 // component
 import DateHeader from "./src/components/DateHeader";
@@ -9,9 +9,16 @@ import Empty from "./src/components/Empty";
 const App = () => {
   return (
     <SafeAreaView style={styles.block}>
-      <DateHeader />
-      <Empty />
-      <AddTodo />
+      {/* ios, android keyboard issue */}
+      <KeyboardAvoidingView
+        // behavior={Platform.OS === "ios" ? "padding" : undefined}
+        behavior={Platform.select({ ios: "padding", android: undefined })}
+        style={styles.avoid}
+      >
+        <DateHeader />
+        <Empty />
+        <AddTodo />
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
@@ -22,5 +29,8 @@ const styles = StyleSheet.create({
   block: {
     flex: 1,
     backgroundColor: "#fff", // when in android default background color is not #fff so you should check it out
+  },
+  avoid: {
+    flex: 1,
   },
 });
