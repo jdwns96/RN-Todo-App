@@ -10,8 +10,8 @@ const App = () => {
   return (
     <SafeAreaView style={styles.block}>
       <DateHeader />
-      <AddTodo />
       <Empty />
+      <AddTodo />
     </SafeAreaView>
   );
 };
@@ -21,5 +21,6 @@ export default App;
 const styles = StyleSheet.create({
   block: {
     flex: 1,
+    backgroundColor: "#fff", // when in android default background color is not #fff so you should check it out
   },
 });
