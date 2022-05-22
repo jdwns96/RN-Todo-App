@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView, StyleSheet, KeyboardAvoidingView, Platform } from "react-native";
 
 // component
@@ -6,6 +6,7 @@ import DateHeader from "./src/components/DateHeader";
 import AddTodo from "./src/components/AddTodo";
 import Empty from "./src/components/Empty";
 import TodoList from "./src/components/TodoList";
+import todosStorage from "./src/storages/todosStorage";
 
 const App = () => {
   const [todos, setTodos] = useState([
@@ -34,6 +35,14 @@ const App = () => {
     const nextTodos = todos.filter((todo) => todo.id !== id);
     setTodos(nextTodos);
   };
+
+  useEffect(() => {
+    todosStorage.get().then(setTodos).catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    todosStorage.set(todos).catch(console.error);
+  }, [todos]);
 
   return (
     <SafeAreaView style={styles.block}>
