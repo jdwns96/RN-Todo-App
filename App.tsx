@@ -30,6 +30,11 @@ const App = () => {
     setTodos(nextTodos);
   };
 
+  const onRemove = (id: number) => {
+    const nextTodos = todos.filter((todo) => todo.id !== id);
+    setTodos(nextTodos);
+  };
+
   return (
     <SafeAreaView style={styles.block}>
       {/* ios, android keyboard issue */}
@@ -39,7 +44,7 @@ const App = () => {
         style={styles.avoid}
       >
         <DateHeader />
-        {todos.length === 0 ? <Empty /> : <TodoList todos={todos} onToggle={onToggle} />}
+        {todos.length === 0 ? <Empty /> : <TodoList todos={todos} onToggle={onToggle} onRemove={onRemove} />}
         <AddTodo onInsert={onInsert} />
       </KeyboardAvoidingView>
     </SafeAreaView>
