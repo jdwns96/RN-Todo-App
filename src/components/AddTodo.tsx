@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, Platform, TouchableNativeFeedback, Keyboard } from "react-native";
 
+interface Props {
+  onInsert: (text: string) => void;
+}
+
 /**
  *
  * when ios emulator keyboard is not working
@@ -12,14 +16,17 @@ import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, Platform, T
  * Touch Effects
  *
  * - TouchableHighlight -> change background color when touching
- * - TouchableNativeFeedback -> show water wave effects in android when you used ios that will be make error
+ * - TouchableNativeFeedback -> show water wave effects in android but when you used in ios that will be make error
  * - TouchableOpacity -> opacity effect
  * - TouchableWithoutFeedback -> have no effects
  */
-export default function AddTodo() {
+export default function AddTodo(props: Props) {
+  const { onInsert } = props;
   const [text, setText] = useState("");
 
   const onPress = () => {
+    if (text.trim() === "") return null;
+    onInsert(text);
     setText("");
     Keyboard.dismiss();
   };
